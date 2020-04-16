@@ -1,0 +1,52 @@
+version: '3'
+services:
+  mysql:
+    image: "landyaos/rio-mysql"
+    build:
+      context: ./mysql
+      dockerfile: Dockerfile
+    container_name: mysql
+    expose:
+      - 3306
+    ports:
+    - "13306:3306"
+    networks:
+      buss:
+        ipv4_address: 172.0.0.2
+  demo:
+    image: "landyaos/rio-demo"
+    build:
+      context: ./demo
+      dockerfile: Dockerfile
+    depends_on:
+      - mysql
+    container_name: demo
+    stdin_open: true
+    tty: true
+    expose:
+      - 8000
+    ports:
+      - "8000:8000"
+    networks:
+      buss:
+        ipv4_address: 172.0.0.3
+  web:
+    image: "landyaos/rio-web"
+    build:
+      context: ./web
+      dockerfile: Dockerfile
+    container_name: web
+    stdin_open: true
+    tty: true
+    ports:
+    - "8080:80"
+    networks:
+      buss:
+        ipv4_address: 172.0.0.4
+
+networks:
+  buss:
+    driver: bridge
+    ipam:
+      config:
+      - subnet: 172.0.0.0/24
