@@ -13,6 +13,7 @@ services:
     networks:
       buss:
         ipv4_address: 172.0.0.2
+
   demo:
     image: "landyaos/rio-demo"
     build:
@@ -30,6 +31,7 @@ services:
     networks:
       buss:
         ipv4_address: 172.0.0.3
+
   web:
     image: "landyaos/rio-web"
     build:
@@ -43,6 +45,18 @@ services:
     networks:
       buss:
         ipv4_address: 172.0.0.4
+
+  scrapy:
+    image: "landyaos/rio-spider"
+      build:
+        context: ./rio_spider
+        dockerfile: Dockerfile
+      container_name: spider
+      stdin_open: true
+      tty: true
+      networks:
+        buss:
+          ipv4_address: 172.0.0.5
 
 networks:
   buss:

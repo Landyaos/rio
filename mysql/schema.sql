@@ -6,8 +6,8 @@ flush privileges;
 
 -- 建库
 create database recommendsystem default character set utf8 collate utf8_general_ci;
-create database douban_spider default character set utf8 collate utf8_general_ci;
-use douban_spider;
+create database demo default character set utf8 collate utf8_general_ci;
+use demo;
 
 
 -- 建表
